@@ -4,12 +4,8 @@ import torch
 import torchvision
 
 
-def fetch_dataset():
+def fetch_dataset(transform):
     """ Collect MNIST """
-    transform = torchvision.transforms.Compose([
-        torchvision.transforms.ToTensor(),
-        torchvision.transforms.Normalize((0.1307,), (0.3081,))
-    ])
 
     train_data = torchvision.datasets.MNIST(
         './data', train=True, download=True, transform=transform
