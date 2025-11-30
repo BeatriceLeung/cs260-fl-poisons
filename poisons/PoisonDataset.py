@@ -23,14 +23,9 @@ class PoisonDataset(MNIST):
 
         if self.transform:
             image = self.transform(image)
-        image = torch.squeeze(image) # remove extra channel dimension
-        # print(image.shape)
-          
-        # one_hot = [0] * 10
-        # one_hot[self.annot.iloc[index, 1]] = 1
-        # one_hot = torch.tensor(one_hot)
 
-        # return image, one_hot
+        # print(image.shape)
+
         return image, torch.tensor(self.annot.iloc[index, 1])
 
 #https://docs.pytorch.org/tutorials/beginner/data_loading_tutorial.html
