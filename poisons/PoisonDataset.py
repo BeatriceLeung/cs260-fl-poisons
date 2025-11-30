@@ -5,11 +5,12 @@ import os
 import torch
 
 class PoisonDataset(MNIST):
-    def __init__(self, label_file, image_file, transform=None):
+    def __init__(self, label_file, image_file, transform=None, verbose=True):
         # super(PoisonDataSet, self).__init__()
         self.root_dir = image_file
         self.annot = read_csv(label_file)
         self.transform = transform
+        self.verbose = verbose
 
     def __len__(self):
         return len(self.annot)
@@ -17,7 +18,8 @@ class PoisonDataset(MNIST):
     def __getitem__(self, index: int):
         img_name = os.path.join(self.root_dir,
                                 self.annot.iloc[index, 0]) # csv: image_name,label\n
-        print("Opening image: ", img_name)
+        if self.verbose:
+            print("Opening image: ", img_name)
         image = Image.open(img_name)
         image = image.convert('L')
 
